@@ -496,12 +496,12 @@
     /* CONTACT */
     .contact-row {
       display: flex;
-      justify-content: space-between;  /* 양 끝을 Guest Book 카드와 맞춤 */
-      gap: 12px;
+      justify-content: space-between; /* 왼쪽/오른쪽 가장자리를 위 카드와 맞춤 */
+      gap: 0;                         /* 계산 오차 없애기 위해 gap 제거 */
     }
     
     .contact-card {
-      flex: 0 0 calc(50% - 6px);       /* 두 박스가 합쳐서 위 카드 폭과 정확히 맞게 */
+      width: 48%;                     /* 두 카드 + 사이 여백이 100% 안에서 딱 맞게 */
       background: var(--bg-card);
       border-radius: 26px;
       padding: 16px 18px 18px;
