@@ -51,56 +51,19 @@
 
     /* HERO */
     .hero {
-      position: relative;        /* 오버레이 기준 잡기 */
+      position: relative;
       width: 100%;
-      background-size: contain; 
+      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
 
     .hero img {
       width: 100%;
-      height: auto;              /* 비율 유지, 안 잘리도록 */
+      height: auto;
       object-fit: contain;
       object-position: center center;
       display: block;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: transparent;  /* 어두운 필터 제거 */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 34px 18px 40px;
-      color: #fff;
-      text-align: center;
-    }
-
-    .hero-top-name {
-      position: absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-family: "Playfair Display", serif;
-      font-size: 14px;
-      letter-spacing: 0.10em;
-    }
-
-    .hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: 32px;
-      line-height: 1.08;
-      margin-bottom: 8px;
-    }
-
-    .hero-date {
-      font-size: 11px;
-      letter-spacing: 0.23em;
-      text-transform: uppercase;
     }
 
     /* 공통 섹션 */
@@ -139,38 +102,39 @@
       margin-top: 6px;
     }
 
+    /* 여기부터 선 + 네모 장식 */
     .top-divider-wrap {
-      position: relative;
-      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 32px 18px;
     }
 
     .top-divider-line {
-      border-top: 1px solid #f1dcc9;
-      margin: 0 28px;
+      flex: 1;
+      height: 1px;
+      background: #f2e3d6;
     }
 
     .top-divider-dot {
-      position: absolute;
-      top: -3px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 3px;
       background: #f9dfc1;
-      box-shadow: 0 0 0 4px #f6ece4;
+      box-shadow: 0 0 0 3px #ffffff;
+      margin: 0 10px;
     }
 
     .top-names {
       font-family: "Playfair Display", serif;
-      font-size: 18px;
-      margin-bottom: 6px;
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
     .top-tagline {
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-muted);
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     .info-pill-row {
@@ -185,7 +149,7 @@
       justify-content: flex-start;
       gap: 6px;
       padding: 6px 0;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
     }
 
@@ -204,13 +168,6 @@
 
     .info-pill-text {
       display: inline-block;
-    }
-
-    .divider-dot {
-      margin-top: 10px;
-      font-size: 10px;
-      color: #d4b6a2;
-      letter-spacing: 0.3em;
     }
 
     /* INVITATION 카드 */
@@ -234,7 +191,7 @@
       justify-content: center;
       color: var(--accent);
       font-size: 16px;
-      background: transparent; /* 카드 밖으로 분리 */
+      background: transparent;
     }
 
     .invite-card {
@@ -433,7 +390,7 @@
 
     /* Getting There 카드 */
     .getting-card {
-      background: #ffffff;  /* 요청대로 흰색 */
+      background: #ffffff;
       border-radius: 26px;
       padding: 18px 18px 16px;
       box-shadow: var(--shadow-soft);
@@ -716,9 +673,11 @@
       <!-- TOP INFO -->
       <section class="section">
         <div class="top-info-card">
+          <!-- 위 장식 라인 -->
           <div class="top-divider-wrap">
-            <div class="top-divider-line"></div>
-            <div class="top-divider-dot"></div>
+            <span class="top-divider-line"></span>
+            <span class="top-divider-dot"></span>
+            <span class="top-divider-line"></span>
           </div>
 
           <div class="top-names">Daniel &amp; Diana</div>
@@ -731,9 +690,11 @@
             </div>
           </div>
 
-          <div class="top-divider-wrap" style="margin-top: 14px;">
-            <div class="top-divider-line"></div>
-            <div class="top-divider-dot"></div>
+          <!-- 아래 장식 라인 -->
+          <div class="top-divider-wrap" style="margin-bottom: 0;">
+            <span class="top-divider-line"></span>
+            <span class="top-divider-dot"></span>
+            <span class="top-divider-line"></span>
           </div>
         </div>
       </section>
