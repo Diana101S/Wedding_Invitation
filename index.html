@@ -91,18 +91,27 @@
       margin-bottom: 12px;
     }
 
-    /* TOP INFO */
+    /* ── TOP INFO (Daniel & Diana) ───────────────── */
+
+    /* 이 섹션 전체를 흰색 배경으로 */
+    .top-info-section {
+      background: #ffffff;
+      padding-top: 28px;
+      padding-bottom: 30px;
+      margin-bottom: 20px;
+    }
+
     .top-info-card {
       text-align: center;
       padding-top: 24px;
       padding-bottom: 24px;
-      border-radius: var(--radius-card);
-      box-shadow: var(--shadow-soft);
-      background: #ffffff;
-      margin-top: 6px;
+      border-radius: 0;        /* 라운드 제거 */
+      box-shadow: none;        /* 그림자 제거 */
+      background: transparent; /* 카드 박스 없이 플랫하게 */
+      margin-top: 0;
     }
 
-    /* 여기부터 선 + 네모 장식 */
+    /* 선 + 네모 장식 */
     .top-divider-wrap {
       display: flex;
       align-items: center;
@@ -671,7 +680,7 @@
 
     <main>
       <!-- TOP INFO -->
-      <section class="section">
+      <section class="section top-info-section">
         <div class="top-info-card">
           <!-- 위 장식 라인 -->
           <div class="top-divider-wrap">
