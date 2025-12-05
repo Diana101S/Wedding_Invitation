@@ -51,17 +51,58 @@
     }
 
     /* HERO */
-    /* HERO */
-    .hero {
-      padding: 0 18px;          /* 아래 카드(.section)와 같은 좌우 패딩 */
+    .hero{
+    position:relative;
+    overflow:hidden;
     }
-    
-    .hero img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-      border-radius: 8px; 
+    .hero img{
+    width:100%;
+    height:auto;
+    position:relative;
+    z-index:1;
+    }
+    .badge{
+    position:absolute;right:16px;bottom:16px;
+    background:#ffffffdd;color:var(--ink);
+    padding:8px 12px;border-radius:999px;
+    font-weight:600;font-size:14px;
+    backdrop-filter:saturate(180%) blur(6px);
+    z-index:3;
+    }
+
+    /* Hero cherry blossom petals (HERO 안에서만) */
+    .hero-petal-layer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:2;
+    }
+    /* 눈 + 벚꽃 중간 느낌 */
+    .petal{
+    position:absolute;
+    top:-8vh;
+    width:12px;
+    height:16px;
+    background:radial-gradient(circle at 30% 30%, #ffffff, #ffeef7 60%, #ffd7e5 100%);
+    border-radius:55% 45% 60% 40%;
+    opacity:0.7;
+    box-shadow:0 0 4px rgba(255,220,235,0.6);
+    animation:petal-fall linear infinite;
+    transform-origin:center;
+    }
+    @keyframes petal-fall{
+    0%{
+        transform:translate3d(0,-10vh,0) rotate(0deg);
+        opacity:0;
+    }
+    15%{
+        opacity:0.8;
+    }
+    100%{
+        transform:translate3d(0,110vh,0) rotate(280deg);
+        opacity:0;
+    }
     }
 
     .hero-overlay {
@@ -710,6 +751,7 @@
 
     <!-- HERO -->
     <header class="hero">
+        <div class="hero-petal-layer" id="petal-layer" aria-hidden="true"></div>
       <img src="images/thumbnail.png" alt="Daniel and Diana together" />
     </header>
 
@@ -1249,6 +1291,26 @@
       }, 1500);
     });
   }
+
+    // Hero cherry blossom petals (단순 버전)
+    (function makePetals(){
+    const container = document.getElementById('petal-layer');
+    if (!container) return;
+
+    const COUNT = 10;
+
+    for (let i = 0; i < COUNT; i++) {
+        const p = document.createElement('div');
+        p.className = 'petal';
+
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+        p.style.animationDelay = (Math.random() * -14) + 's';
+
+        container.appendChild(p);
+    }
+    })();
+
 
   // 🔹 페이지 처음 로드될 때 기존 방명록 불러오기
   loadGuests();
