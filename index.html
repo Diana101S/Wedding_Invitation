@@ -213,6 +213,7 @@
 
     .invite-name-main {
       font-weight: 600;
+      font-size: 14px;
     }
 
     .invite-name-role {
@@ -228,8 +229,8 @@
     .calendar-title {
       font-family: "Playfair Display", serif;
       text-align: center;
-      font-size: 15px;
-      margin-bottom: 16px;
+      font-size: 18px;
+      margin-bottom: 30px;
     }
 
     .calendar-grid {
@@ -260,8 +261,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;   /* 하트 전체 크기 */
-      height: 32px;
+      width: 40px;   /* 하트 전체 크기 */
+      height: 40px;
     }
     
     /* 숫자 6 */
@@ -279,8 +280,9 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -52%);
-      font-size: 28px;    /* 하트 크기 – 더 키우려면 30px 정도로 변경 */
+      font-size: 34px;    /* 하트 크기 – 더 키우려면 30px 정도로 변경 */
       color: #e25b4e;
+      font-weight: 300;  
     }
 
     .calendar-note {
@@ -293,14 +295,14 @@
     /* COUNTDOWN */
     .countdown-row {
       display: flex;
-      justify-content: space-between;
-      gap: 8px;
+      justify-content: center;  /* 가운데 몰기 */
+      gap: 14px;                 /* 간격 조금만 */
       margin-top: 16px;
     }
 
     /* 세로 길이 1.5배 정도 */
     .count-box {
-      flex: 1;
+      flex: 0 0 70px;
       border-radius: 16px;
       border: 1px solid var(--border-soft);
       background: #fff7f2;
@@ -318,7 +320,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .count-num {
@@ -360,7 +362,8 @@
       border-radius: 999px;
       border: 1px solid var(--border-soft);
       background: #fff7f0;
-      padding: 10px 14px;
+      height: 35px;          /* 🔹 고정 높이 */
+      padding: 0 14px;       /* 🔹 세로 padding 제거, 가로만 유지 */
       font-size: 12px;
       display: flex;
       align-items: center;
@@ -510,6 +513,42 @@
       color: var(--text-muted);
     }
 
+    /* GUESTBOOK 리스트 */
+    .guest-list {
+      margin-top: 12px;
+      border-top: 1px solid #f0dfd0;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .guest-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #f7e5d4;
+      font-size: 12px;
+    }
+
+    .guest-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .guest-item-name {
+      font-weight: 600;
+    }
+
+    .guest-item-date {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .guest-item-message {
+      line-height: 1.6;
+    }
+    
     /* CONTACT */
     .contact-row {
       display: flex;
@@ -522,7 +561,7 @@
       background: var(--bg-card);
       border-radius: 26px;
       padding: 24px 18px 24px;  /* 위아래 여백 ↑ */
-      min-height: 220px;        /* 박스 기본 높이 지정 */
+      min-height: 190px;        /* 박스 기본 높이 지정 */
       box-shadow: var(--shadow-soft);
       text-align: left;
       font-size: 11px;
@@ -554,7 +593,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 14px;
+      padding: 4px 14px;
       border-radius: 999px;
       border: 1px solid #edd8c6;
       background: #fff7f0;
@@ -718,7 +757,7 @@
               <tr>
                 <td></td><td><span>1</span></td><td><span>2</span></td>
                 <td><span>3</span></td><td><span>4</span></td>
-                <td><span>5</span></td><td><span class="heart-day">6</span></td>
+                <td><span>5</span></td><td><span class="heart-day"><span class="heart-day-number">6</span></span></td>
               </tr>
               <tr>
                 <td><span>7</span></td><td><span>8</span></td><td><span>9</span></td>
@@ -843,6 +882,7 @@
             <button type="submit" class="btn-submit">Leave a message</button>
             <div class="guest-status" id="guest-status"></div>
           </form>
+          <div class="guest-list" id="guest-list"></div>
         </div>
       </section>
 
@@ -1000,26 +1040,6 @@
       });
     })();
 
-    // Guest book 폼 기본 처리 (새로고침 방지 + 메시지 표시)
-    (function () {
-      const form = document.getElementById("guest-form");
-      const statusEl = document.getElementById("guest-status");
-
-      if (!form) return;
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const message = document.getElementById("guest-message")?.value.trim();
-
-        if (!message) return;
-
-        if (statusEl) {
-          statusEl.textContent = "Thank you for your message!";
-        }
-        form.reset();
-      });
-    })();
-
     // Countdown – 2026-06-06 13:00 KST
     (function () {
       const target = new Date("2026-06-06T13:00:00+09:00");
@@ -1059,5 +1079,133 @@
       setInterval(updateCountdown, 1000);
     })();
   </script>
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/esm/supabase.js";
+
+  // 🔹 여기에 너 Supabase 프로젝트 값 넣기
+  const SUPABASE_URL = "https://khddckyznivjoluwtvxo.supabase.co";      // 수정 필요
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoZGRja3l6bml2am9sdXd0dnhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3MTk1NDYsImV4cCI6MjA3ODI5NTU0Nn0.zblwD4ETNzl1YlFBTfpqvxkvGPrE1RhawPLC9_iUxoE";                // 수정 필요
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById("guest-form");
+  const nameInput = document.getElementById("guest-name");
+  const messageInput = document.getElementById("guest-message");
+  const statusEl = document.getElementById("guest-status");
+  const listEl = document.getElementById("guest-list");
+
+  // 🔹 created_at 예쁘게 포맷
+  function formatDate(isoString) {
+    if (!isoString) return "";
+    const d = new Date(isoString);
+    // 한국 기준으로 YYYY.MM.DD HH:MM 정도
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const hour = String(d.getHours()).padStart(2, "0");
+    const minute = String(d.getMinutes()).padStart(2, "0");
+    return `${year}.${month}.${day} ${hour}:${minute}`;
+  }
+
+  // 🔹 화면에 리스트 그리기
+  function renderGuests(guests) {
+    if (!listEl) return;
+
+    if (!guests || guests.length === 0) {
+      listEl.innerHTML = `<p style="font-size:12px; color:#9a7a67;">No messages yet. Be the first to leave a note 💌</p>`;
+      return;
+    }
+
+    listEl.innerHTML = guests
+      .map((g) => {
+        const safeName = g.name && g.name.trim() !== "" ? g.name : "Anonymous";
+        const date = formatDate(g.created_at);
+        const msg = (g.message || "").replace(/\n/g, "<br/>");
+
+        return `
+          <div class="guest-item">
+            <div class="guest-item-header">
+              <span class="guest-item-name">${safeName}</span>
+              <span class="guest-item-date">${date}</span>
+            </div>
+            <div class="guest-item-message">${msg}</div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  // 🔹 Supabase에서 방명록 가져오기
+  async function loadGuests() {
+    if (!listEl) return;
+    listEl.innerHTML = `<p style="font-size:12px; color:#9a7a67;">Loading messages...</p>`;
+
+    // ⚠️ 여기 "guestbook"은 네 테이블 이름으로 바꿔야 함
+    const { data, error } = await supabase
+      .from("guestbook") // ← 여기 테이블 이름
+      .select("id, name, message, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      listEl.innerHTML = `<p style="font-size:12px; color:#9a7a67;">Failed to load messages.</p>`;
+      return;
+    }
+
+    renderGuests(data);
+  }
+
+  // 🔹 폼 제출 → Supabase에 저장
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!messageInput) return;
+
+      const name = nameInput?.value.trim() || "";
+      const message = messageInput.value.trim();
+
+      if (!message) {
+        if (statusEl) statusEl.textContent = "Please write a message.";
+        return;
+      }
+
+      if (statusEl) statusEl.textContent = "Saving...";
+
+      // ⚠️ 마찬가지로 "guestbook"을 네 테이블 이름으로 변경
+      const { error } = await supabase.from("guestbook").insert([
+        {
+          name: name || null,
+          message,
+          // created_at은 Supabase에서 default now()로 처리된다면 생략 가능
+          // pin_hash는 지금은 안 쓸 거면 null로 둬도 됨
+          pin_hash: null,
+        },
+      ]);
+
+      if (error) {
+        console.error(error);
+        if (statusEl) statusEl.textContent = "Something went wrong. Please try again.";
+        return;
+      }
+
+      if (statusEl) statusEl.textContent = "Thank you for your message!";
+
+      // 폼 비우기
+      if (nameInput) nameInput.value = "";
+      messageInput.value = "";
+
+      // 리스트 다시 로딩
+      await loadGuests();
+
+      // 상태 메시지 잠시 후 지우기
+      setTimeout(() => {
+        if (statusEl) statusEl.textContent = "";
+      }, 1500);
+    });
+  }
+
+  // 🔹 페이지 처음 로드될 때 기존 방명록 불러오기
+  loadGuests();
+</script>
 </body>
 </html>
